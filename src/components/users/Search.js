@@ -1,30 +1,36 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 
-function Search() {
-  const [text, setText] = useState('');
-
-  const onSubmit = (e) => {
-    e.preventDefault();
+export class Search extends Component {
+  state = {
+    text: '',
   };
 
-  return (
-    <div>
-      <form className='form' onSubmit={onSubmit}>
-        <input
-          type='text'
-          name='text'
-          placeholder='Search for Users...'
-          value={text || ''}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <input
-          type='submit'
-          value='Search'
-          className='btn btn-dark btn-block'
-        />
-      </form>
-    </div>
-  );
+  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
+  onSubmit = (e) => {
+    e.preventDefault();
+    this.props.searchUsers(this.state.text);
+    this.setState({ text: '' });
+  };
+
+  render() {
+    return (
+      <div>
+        <form className='form' onSubmit={this.onSubmit}>
+          <input
+            type='text'
+            name='text'
+            placeholder='Search Users...'
+            value={this.state.text}
+            onChange={this.onChange}
+          />
+          <input
+            type='submit'
+            value='Search'
+            className='btn btn-dark btn-block'
+          />
+        </form>
+      </div>
+    );
+  }
 }
-//this is for github
 export default Search;
