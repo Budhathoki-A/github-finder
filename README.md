@@ -1,2 +1,2 @@
 # github-finder
- Web app developed using react which searches fro the users of github
+ Web app developed using react which searches for the users of github
