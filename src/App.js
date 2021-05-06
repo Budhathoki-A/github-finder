@@ -22,11 +22,13 @@ import axios from 'axios';
 
    // for searching github users
    searchUsers = async text => {
-     const res = await axios.get(
-       `https://api.github.com/search/users?q=${text}$client_id =
-    ${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_server = ${process.env.REACT_APP_GITHUB_CLIENT_SERVER}`);
-
-    this.setState({ users: res.data.items, loading: false });
+     try {
+       const res = await axios.get(
+         `https://api.github.com/search/users?q=${text}`);
+       this.setState({ users: res.data.items, loading: false });
+     } catch(error) {
+       console.log(error);
+     }
   }
 
   render() {
