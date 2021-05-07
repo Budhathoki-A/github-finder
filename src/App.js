@@ -6,6 +6,7 @@ import Search from './components/users/Search';
 import axios from 'axios';
 import Alert from './components/layout/Alert';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import About from './components/pages/About';
 
 class App extends Component {
   state = {
@@ -56,7 +57,9 @@ class App extends Component {
                 />
                 <Users loading={loading} users={users} />
                 </>
-              )}/ >
+              )} />
+              
+              <Route exact path='/about' component = {About} />
                  
             </Switch>
           
