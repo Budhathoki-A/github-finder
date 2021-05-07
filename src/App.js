@@ -5,6 +5,7 @@ import Users from './components/users/Users';
 import Search from './components/users/Search';
 import axios from 'axios';
 import Alert from './components/layout/Alert';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 class App extends Component {
   state = {
@@ -38,19 +39,30 @@ class App extends Component {
   render() {
     const { users, loading } = this.state;
     return (
+      <Router>
       <div className='App'>
         <Navbar />
         <div className='container'>
-          <Alert alert={this.state.alert}/>
-          <Search
-            searchUsers={this.searchUsers}
-            clearUsers={this.clearUsers}
-            showClear={users.length > 0 ? true : false}
-            setAlert = {this.setAlert}
-          />
-          <Users loading={loading} users={users} />
+            <Alert alert={this.state.alert} />
+            
+            <Switch>
+              <Route exact path='/' render={props => (
+                <>
+                 <Search
+                  searchUsers={this.searchUsers}
+                  clearUsers={this.clearUsers}
+                  showClear={users.length > 0 ? true : false}
+                  setAlert = {this.setAlert}
+                />
+                <Users loading={loading} users={users} />
+                </>
+              )}/ >
+                 
+            </Switch>
+          
         </div>
       </div>
+      </Router>
     );
   }
 }
