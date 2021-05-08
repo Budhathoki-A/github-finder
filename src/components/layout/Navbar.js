@@ -5,8 +5,13 @@ import { Link } from 'react-router-dom';
 function Navbar({ icon, title }) {
   return (
     <nav className='navbar bg-primary'>
-      <i className={icon} style={{ fontSize: '30px', padding: '10px' }}></i>
-      <h1>{title}</h1>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <i
+          className={icon}
+          style={{ fontSize: '30px', marginRight: '10px' }}></i>
+        <h1>{title}</h1>
+      </div>
+
       <ul>
         <li>
           <Link to='/'>Home</Link>
