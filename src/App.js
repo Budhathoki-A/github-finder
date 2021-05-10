@@ -7,10 +7,12 @@ import axios from 'axios';
 import Alert from './components/layout/Alert';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import About from './components/pages/About';
+import SingleUser from './components/users/SingleUser'
 
 class App extends Component {
   state = {
     users: [],
+    user: {},
     loading: false,
     alert: null
   };
@@ -37,8 +39,22 @@ class App extends Component {
     setTimeout(()=>{this.setState({alert:null})}, 4000)
   }
 
+  // Get single Github user
+  getUser = async (username) => {
+     try {
+      const res = await axios.get(
+        `https://api.github.com/users?q=${username}`
+      );
+       this.setState({ user: res.data, loading: false });
+       console.log(res.data)
+    } catch (error) {
+      console.log(error);
+     }
+    console.log(username);
+  };
+  
   render() {
-    const { users, loading } = this.state;
+    const { users, loading, user } = this.state;
     return (
       <Router>
       <div className='App'>
@@ -60,7 +76,6 @@ class App extends Component {
               )} />
               
               <Route exact path='/about' component = {About} />
-                 
             </Switch>
           
         </div>
